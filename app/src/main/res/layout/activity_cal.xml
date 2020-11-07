@@ -11,7 +11,17 @@
         android:paddingTop="20dp"
         android:paddingBottom="20dp"
         android:text="Welcome to calculator page"
-        android:textStyle="bold"/>
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent"/>
+    <TextView
+        android:id="@+id/input_old"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
+        android:text="Welcome to calculator page"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/answer_cal"/>
     <EditText
         android:id="@+id/input_cal"
         android:layout_width="match_parent"
@@ -20,7 +30,7 @@
         android:inputType="phone"
         android:padding="5dp"
         android:textSize="36sp"
-        app:layout_constraintTop_toBottomOf="@id/answer_cal"
+        app:layout_constraintTop_toBottomOf="@id/input_old"
         app:layout_constraintLeft_toLeftOf="parent"/>
     <Button
         android:id="@+id/num_1"
