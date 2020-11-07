@@ -17,7 +17,7 @@ public class GetCalculator extends AppCompatActivity {
 
   TextView answerCal, inputOld;
   EditText editText;
-  Button button_1, button_2, button_3, button_4, button_5, button_6, button_7, button_8, button_9;
+  Button button_0, button_1, button_2, button_3, button_4, button_5, button_6, button_7, button_8, button_9;
   Button button_plus, button_minus, button_multiply, button_divide, button_equal, button_reset, button_float;
   Double value_a;
   String current_operation;
@@ -45,6 +45,7 @@ public class GetCalculator extends AppCompatActivity {
     button_7 = (Button)findViewById(R.id.num_7);
     button_8 = (Button)findViewById(R.id.num_8);
     button_9 = (Button)findViewById(R.id.num_9);
+    button_0 = (Button)findViewById(R.id.num_0);
 
     button_plus = (Button)findViewById(R.id.plus);
     button_minus = (Button)findViewById(R.id.minus);
@@ -54,6 +55,13 @@ public class GetCalculator extends AppCompatActivity {
     button_reset = (Button)findViewById(R.id.reset);
     button_float = (Button)findViewById(R.id.floatPoint);
 
+    button_0.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        inputPlaceHolder.append("0");
+        editText.setText(inputPlaceHolder);
+      }
+    });
     button_1.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
@@ -120,24 +128,23 @@ public class GetCalculator extends AppCompatActivity {
     button_float.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        inputPlaceHolder.append(".");
-        editText.setText(inputPlaceHolder);
+        if(!inputPlaceHolder.toString().isEmpty()) {
+          inputPlaceHolder.append(".");
+          editText.setText(inputPlaceHolder);
+        }
       }
     });
-
-
 
     button_plus.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
         if(!editText.getText().toString().isEmpty() || value_a != null) {
           calTempValue();
-//          Log.d("plus", "#############" + current_operation);
           current_operation = "+";
+          answerCal.setText(value_a.toString());
           inputOld.setText(inputPlaceHolder);
           inputPlaceHolder = new StringBuilder("");
           editText.setText(inputPlaceHolder);
-//          Log.d("qaz", "#############" + value_b);
         }
         clickCount =+ 1;
       }
@@ -148,6 +155,7 @@ public class GetCalculator extends AppCompatActivity {
         if(!editText.getText().toString().isEmpty() || value_a != null) {
           calTempValue();
           current_operation = "-";
+          answerCal.setText(value_a.toString());
           inputOld.setText(inputPlaceHolder);
           inputPlaceHolder = new StringBuilder("");
           editText.setText(inputPlaceHolder);
@@ -161,6 +169,7 @@ public class GetCalculator extends AppCompatActivity {
         if(!editText.getText().toString().isEmpty() || value_a != null) {
           calTempValue();
           current_operation = "*";
+          answerCal.setText(value_a.toString());
           inputOld.setText(inputPlaceHolder);
           inputPlaceHolder = new StringBuilder("");
           editText.setText(inputPlaceHolder);
@@ -174,6 +183,7 @@ public class GetCalculator extends AppCompatActivity {
         if(!editText.getText().toString().isEmpty() || value_a != null) {
           calTempValue();
           current_operation = "/";
+          answerCal.setText(value_a.toString());
           inputOld.setText(inputPlaceHolder);
           inputPlaceHolder = new StringBuilder("");
           editText.setText(inputPlaceHolder);
@@ -182,19 +192,17 @@ public class GetCalculator extends AppCompatActivity {
       }
     });
 
-
-
     button_equal.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
         if(!editText.getText().toString().isEmpty()) {
           calTempValue();
+          answerCal.setText(value_a.toString());
+          inputOld.setText(inputPlaceHolder);
+          inputPlaceHolder = new StringBuilder("");
+          editText.setText(inputPlaceHolder);
+          current_operation = "";
         }
-        answerCal.setText(value_a.toString());
-        inputOld.setText(inputPlaceHolder);
-        inputPlaceHolder = new StringBuilder("");
-        editText.setText(inputPlaceHolder);
-        current_operation = "";
       }
     });
     button_reset.setOnClickListener(new View.OnClickListener() {
@@ -209,9 +217,7 @@ public class GetCalculator extends AppCompatActivity {
         current_operation = "";
       }
     });
-
   };
-
 
   public void calTempValue() {
     if(clickCount == 0) {
@@ -234,8 +240,7 @@ public class GetCalculator extends AppCompatActivity {
           break;
       }
     }
-    Log.d("qaz", "#############" + value_a);
-
+    Log.d("final calculate value", "#############" + value_a);
   }
 
 }
