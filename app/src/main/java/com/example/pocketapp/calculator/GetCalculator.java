@@ -19,11 +19,9 @@ public class GetCalculator extends AppCompatActivity {
   EditText editText;
   Button button_1, button_2, button_3, button_4, button_5, button_6, button_7, button_8, button_9;
   Button button_plus, button_minus, button_multiply, button_divide, button_equal, button_reset, button_float;
-  Double value_a = 0.0, value_b = 0.0;
+  Double value_a;
   String current_operation;
-  Double value_c;
   int clickCount = 0;
-
 
   StringBuilder inputPlaceHolder;
 
@@ -132,7 +130,7 @@ public class GetCalculator extends AppCompatActivity {
     button_plus.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        if(value_a != 0.0) {
+        if(!editText.getText().toString().isEmpty() || value_a != null) {
           calTempValue();
 //          Log.d("plus", "#############" + current_operation);
           current_operation = "+";
@@ -147,7 +145,7 @@ public class GetCalculator extends AppCompatActivity {
     button_minus.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        if(value_a != 0.0) {
+        if(!editText.getText().toString().isEmpty() || value_a != null) {
           calTempValue();
           current_operation = "-";
           inputOld.setText(inputPlaceHolder);
@@ -160,7 +158,7 @@ public class GetCalculator extends AppCompatActivity {
     button_multiply.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        if(value_a != 0.0) {
+        if(!editText.getText().toString().isEmpty() || value_a != null) {
           calTempValue();
           current_operation = "*";
           inputOld.setText(inputPlaceHolder);
@@ -173,7 +171,7 @@ public class GetCalculator extends AppCompatActivity {
     button_divide.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        if(!editText.getText().toString().isEmpty()) {
+        if(!editText.getText().toString().isEmpty() || value_a != null) {
           calTempValue();
           current_operation = "/";
           inputOld.setText(inputPlaceHolder);
@@ -217,20 +215,20 @@ public class GetCalculator extends AppCompatActivity {
 
   public void calTempValue() {
     if(clickCount == 0) {
-      value_a = value_a + Double.parseDouble(editText.getText().toString());
+      value_a = Double.parseDouble(editText.getText().toString());
     } else {
       switch (current_operation) {
         case "+":
-          value_a = value_a+Double.parseDouble(editText.getText().toString());
+          value_a = value_a + Double.parseDouble(editText.getText().toString());
           break;
         case "-":
-          value_a = value_a-Double.parseDouble(editText.getText().toString());
+          value_a = value_a - Double.parseDouble(editText.getText().toString());
           break;
         case "*":
-          value_a = value_a*Double.parseDouble(editText.getText().toString());
+          value_a = value_a * Double.parseDouble(editText.getText().toString());
           break;
         case "/":
-          value_a = value_a/Double.parseDouble(editText.getText().toString());
+          value_a = value_a / Double.parseDouble(editText.getText().toString());
           break;
         case "":
           break;
@@ -238,29 +236,6 @@ public class GetCalculator extends AppCompatActivity {
     }
     Log.d("qaz", "#############" + value_a);
 
-
-//    if(editText.getText().toString().isEmpty()) {
-//      value_a = value_a;
-//    } else if(!editText.getText().toString().isEmpty() && value_a == 0.0) {
-//      value_a = Double.parseDouble(inputPlaceHolder.toString());
-//    } else {
-//      switch (current_operation) {
-//        case "+":
-//          value_a = value_a + Double.parseDouble(editText.getText().toString());
-//          break;
-//        case "-":
-//          value_a = value_a - Double.parseDouble(editText.getText().toString());
-//          break;
-//        case "*":
-//          value_a = value_a * Double.parseDouble(editText.getText().toString());
-//          break;
-//        case "/":
-//          value_a = value_a / Double.parseDouble(editText.getText().toString());
-//          break;
-//        default:
-//          value_a = Double.parseDouble(editText.getText().toString());
-//      }
-//    }
   }
 
 }
