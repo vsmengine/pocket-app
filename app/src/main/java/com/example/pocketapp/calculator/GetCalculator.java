@@ -1,29 +1,27 @@
 package com.example.pocketapp.calculator;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.pocketapp.R;
 
-import static com.example.pocketapp.R.id.answer_cal;
-
 public class GetCalculator extends AppCompatActivity {
 
   TextView answerCal, inputOld;
   EditText editText;
-  Button button_0, button_1, button_2, button_3, button_4, button_5, button_6, button_7, button_8, button_9;
-  Button button_plus, button_minus, button_multiply, button_divide, button_equal, button_reset, button_float;
-  Double value_a;
+  Double value_temp;
   String current_operation;
-  int clickCount = 0;
-
   StringBuilder inputPlaceHolder;
+  int clickCount = 0;
+  String ERROR_MSG = "Please add a number!";
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -31,30 +29,28 @@ public class GetCalculator extends AppCompatActivity {
     setContentView(R.layout.activity_cal);
 
     inputPlaceHolder = new StringBuilder("");
+    editText = (EditText)findViewById(R.id.cal_activity_input_txt);
+    inputOld = (TextView)findViewById(R.id.cal_activity_old_txt);
+    answerCal = (TextView)findViewById(R.id.cal_activity_answer_txt);
+    final Button button_1 = (Button)findViewById(R.id.num_1);
+    final Button button_2 = (Button)findViewById(R.id.num_2);
+    final Button button_3 = (Button)findViewById(R.id.num_3);
+    final Button button_4 = (Button)findViewById(R.id.num_4);
+    final Button button_5 = (Button)findViewById(R.id.num_5);
+    final Button button_6 = (Button)findViewById(R.id.num_6);
+    final Button button_7 = (Button)findViewById(R.id.num_7);
+    final Button button_8 = (Button)findViewById(R.id.num_8);
+    final Button button_9 = (Button)findViewById(R.id.num_9);
+    final Button button_0 = (Button)findViewById(R.id.num_0);
+    final Button button_plus = (Button)findViewById(R.id.plus);
+    final Button button_minus = (Button)findViewById(R.id.minus);
+    final Button button_multiply = (Button)findViewById(R.id.multiply);
+    final Button button_divide = (Button)findViewById(R.id.divide);
+    final Button button_equal = (Button)findViewById(R.id.equal);
+    final Button button_reset = (Button)findViewById(R.id.reset);
+    final Button button_float = (Button)findViewById(R.id.floatPoint);
 
-    editText = (EditText)findViewById(R.id.input_cal);
-    inputOld = (TextView)findViewById(R.id.input_old);
-    answerCal = (TextView)findViewById(answer_cal);
-
-    button_1 = (Button)findViewById(R.id.num_1);
-    button_2 = (Button)findViewById(R.id.num_2);
-    button_3 = (Button)findViewById(R.id.num_3);
-    button_4 = (Button)findViewById(R.id.num_4);
-    button_5 = (Button)findViewById(R.id.num_5);
-    button_6 = (Button)findViewById(R.id.num_6);
-    button_7 = (Button)findViewById(R.id.num_7);
-    button_8 = (Button)findViewById(R.id.num_8);
-    button_9 = (Button)findViewById(R.id.num_9);
-    button_0 = (Button)findViewById(R.id.num_0);
-
-    button_plus = (Button)findViewById(R.id.plus);
-    button_minus = (Button)findViewById(R.id.minus);
-    button_multiply = (Button)findViewById(R.id.multiply);
-    button_divide = (Button)findViewById(R.id.divide);
-    button_equal = (Button)findViewById(R.id.equal);
-    button_reset = (Button)findViewById(R.id.reset);
-    button_float = (Button)findViewById(R.id.floatPoint);
-
+    //Number Button Click Listeners
     button_0.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
@@ -131,20 +127,25 @@ public class GetCalculator extends AppCompatActivity {
         if(!inputPlaceHolder.toString().isEmpty()) {
           inputPlaceHolder.append(".");
           editText.setText(inputPlaceHolder);
+        } else {
+          toastMsg(ERROR_MSG);
         }
       }
     });
 
+    //Operation Button Click Listeners
     button_plus.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        if(!editText.getText().toString().isEmpty() || value_a != null) {
+        if(!editText.getText().toString().isEmpty() || value_temp != null) {
           calTempValue();
           current_operation = "+";
-          answerCal.setText(value_a.toString());
+          answerCal.setText(value_temp.toString());
           inputOld.setText(inputPlaceHolder);
           inputPlaceHolder = new StringBuilder("");
           editText.setText(inputPlaceHolder);
+        } else {
+          toastMsg(ERROR_MSG);
         }
         clickCount =+ 1;
       }
@@ -152,13 +153,15 @@ public class GetCalculator extends AppCompatActivity {
     button_minus.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        if(!editText.getText().toString().isEmpty() || value_a != null) {
+        if(!editText.getText().toString().isEmpty() || value_temp != null) {
           calTempValue();
           current_operation = "-";
-          answerCal.setText(value_a.toString());
+          answerCal.setText(value_temp.toString());
           inputOld.setText(inputPlaceHolder);
           inputPlaceHolder = new StringBuilder("");
           editText.setText(inputPlaceHolder);
+        } else {
+          toastMsg(ERROR_MSG);
         }
         clickCount =+ 1;
       }
@@ -166,13 +169,15 @@ public class GetCalculator extends AppCompatActivity {
     button_multiply.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        if(!editText.getText().toString().isEmpty() || value_a != null) {
+        if(!editText.getText().toString().isEmpty() || value_temp != null) {
           calTempValue();
           current_operation = "*";
-          answerCal.setText(value_a.toString());
+          answerCal.setText(value_temp.toString());
           inputOld.setText(inputPlaceHolder);
           inputPlaceHolder = new StringBuilder("");
           editText.setText(inputPlaceHolder);
+        } else {
+          toastMsg(ERROR_MSG);
         }
         clickCount =+ 1;
       }
@@ -180,28 +185,33 @@ public class GetCalculator extends AppCompatActivity {
     button_divide.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        if(!editText.getText().toString().isEmpty() || value_a != null) {
+        if(!editText.getText().toString().isEmpty() || value_temp != null) {
           calTempValue();
           current_operation = "/";
-          answerCal.setText(value_a.toString());
+          answerCal.setText(value_temp.toString());
           inputOld.setText(inputPlaceHolder);
           inputPlaceHolder = new StringBuilder("");
           editText.setText(inputPlaceHolder);
+        } else {
+          toastMsg(ERROR_MSG);
         }
         clickCount =+ 1;
       }
     });
 
+    //Equal & Reset Button Click Listeners
     button_equal.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
         if(!editText.getText().toString().isEmpty()) {
           calTempValue();
-          answerCal.setText(value_a.toString());
+          answerCal.setText(value_temp.toString());
           inputOld.setText(inputPlaceHolder);
           inputPlaceHolder = new StringBuilder("");
           editText.setText(inputPlaceHolder);
           current_operation = "";
+        } else {
+          toastMsg(ERROR_MSG);
         }
       }
     });
@@ -209,7 +219,7 @@ public class GetCalculator extends AppCompatActivity {
       @Override
       public void onClick(View view) {
         clickCount = 0;
-        value_a = 0.0;
+        value_temp = 0.0;
         inputPlaceHolder = new StringBuilder("");
         editText.setText(inputPlaceHolder);
         inputOld.setText("");
@@ -219,28 +229,36 @@ public class GetCalculator extends AppCompatActivity {
     });
   };
 
+  //Number Calculate Function
   public void calTempValue() {
     if(clickCount == 0) {
-      value_a = Double.parseDouble(editText.getText().toString());
+      value_temp = Double.parseDouble(editText.getText().toString());
     } else {
       switch (current_operation) {
         case "+":
-          value_a = value_a + Double.parseDouble(editText.getText().toString());
+          value_temp = value_temp + Double.parseDouble(editText.getText().toString());
           break;
         case "-":
-          value_a = value_a - Double.parseDouble(editText.getText().toString());
+          value_temp = value_temp - Double.parseDouble(editText.getText().toString());
           break;
         case "*":
-          value_a = value_a * Double.parseDouble(editText.getText().toString());
+          value_temp = value_temp * Double.parseDouble(editText.getText().toString());
           break;
         case "/":
-          value_a = value_a / Double.parseDouble(editText.getText().toString());
+          value_temp = value_temp / Double.parseDouble(editText.getText().toString());
           break;
         case "":
           break;
       }
     }
-    Log.d("final calculate value", "#############" + value_a);
+  }
+
+  //Toast Message Function
+  public void toastMsg(String text) {
+    Context context = getApplicationContext();
+    int duration = Toast.LENGTH_SHORT;
+    Toast toast = Toast.makeText(context, text, duration);
+    toast.show();
   }
 
 }

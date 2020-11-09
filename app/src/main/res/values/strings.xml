@@ -1,6 +1,35 @@
 <resources>
     <string name="app_name">PocketApp</string>
-    <string name="btn_calculator_name">Calculator</string>
-    <string name="btn_blank_name">Blank</string>
-    <string name="btn_contacts_name">Contacts</string>
+    <string name="btn_get_blank">Welcome</string>
+    <string name="btn_get_calculator">Calculator</string>
+    <string name="btn_get_contacts">Contacts</string>
+    <string name="blk_activity_welcome_txt">Welcome to the app</string>
+    <string name="num_1">1</string>
+    <string name="num_2">2</string>
+    <string name="num_3">3</string>
+    <string name="num_4">4</string>
+    <string name="num_5">5</string>
+    <string name="num_6">6</string>
+    <string name="num_7">7</string>
+    <string name="num_8">8</string>
+    <string name="num_9">9</string>
+    <string name="num_0">0</string>
+    <string name="floatPoint">.</string>
+    <string name="plus">+</string>
+    <string name="minus">-</string>
+    <string name="divide">/</string>
+    <string name="multiply">*</string>
+    <string name="equal">=</string>
+    <string name="clear">Clear</string>
+    <string name="cont_label_name">Name:</string>
+    <string name="cont_label_email">Email:</string>
+    <string name="cont_label_gender">Gender:</string>
+    <string name="cont_label_address">Address:</string>
+    <string name="cont_label_phone">Phone:</string>
+    <string name="cont_label_mobile">Mobile:</string>
+    <string name="cont_label_home">Home:</string>
+    <string name="cont_label_office">Office:</string>
+    <string name="cont_label_other">Other:</string>
+    <string name="cont_star_values">xxxxxxxx</string>
+    <string name="show_cont_detail_name">Show Name</string>
 </resources>
