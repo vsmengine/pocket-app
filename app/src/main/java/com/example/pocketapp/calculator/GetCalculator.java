@@ -22,6 +22,7 @@ public class GetCalculator extends AppCompatActivity {
   StringBuilder inputPlaceHolder;
   int clickCount = 0;
   String ERROR_MSG = "Please add a valid input!";
+  String ERROR_MSG_NOT_VALID_OPERATION = "Can not divide by Zero";
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -228,11 +229,22 @@ public class GetCalculator extends AppCompatActivity {
       public void onClick(View view) {
         if(!editText.getText().toString().isEmpty() && !current_operation.isEmpty()) {
           calTempValue();
-          answerCal.setText(value_temp.toString());
-          inputOld.setText(inputPlaceHolder);
-          inputPlaceHolder = new StringBuilder("");
-          editText.setText(inputPlaceHolder);
-          current_operation = "";
+          if(!Double.isInfinite(value_temp)) {
+            answerCal.setText(value_temp.toString());
+            inputOld.setText(inputPlaceHolder);
+            inputPlaceHolder = new StringBuilder("");
+            editText.setText(inputPlaceHolder);
+            current_operation = "";
+          } else {
+            value_temp = 0.0;
+            answerCal.setText(value_temp.toString());
+            inputPlaceHolder = new StringBuilder("");
+            editText.setText(inputPlaceHolder);
+            current_operation = "";
+            toastMsg(ERROR_MSG_NOT_VALID_OPERATION);
+          }
+        } else if(!editText.getText().toString().isEmpty() && current_operation.isEmpty()) {
+
         } else {
           toastMsg(ERROR_MSG);
         }
