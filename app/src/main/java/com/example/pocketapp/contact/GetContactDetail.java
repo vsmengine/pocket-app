@@ -19,12 +19,14 @@ public class GetContactDetail extends AppCompatActivity {
   String name, email, gender, address, mobile, home, office;
   TextView lblName, lblEmail, lblGender, lblAddress, lblMobile, lblHome, lblOffice;
   Button toggleNameBtn;
+  Boolean isNameHide;
 
   @Override
   protected void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_cont_detail);
 
+    isNameHide = true;
     Intent in = getIntent();
     HashMap<String, String> hashMapObject = (HashMap<String, String>) in.getSerializableExtra("contactHashMap");
 
@@ -58,7 +60,14 @@ public class GetContactDetail extends AppCompatActivity {
     toggleNameBtn.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        lblName.setText(name);
+        if(isNameHide) {
+          lblName.setText(name);
+          toggleNameBtn.setText("Hide Name");
+        } else {
+          lblName.setText(starName);
+          toggleNameBtn.setText("Show Name");
+        }
+        isNameHide = !isNameHide;
       }
     });
   }
