@@ -13,17 +13,18 @@ import com.example.pocketapp.other.GetBlank;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button btn_cal, btn_blk, btn_cont;
+//    Button btn_cal, btn_blk, btn_cont;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        final Button btn_cal = (Button)findViewById(R.id.btn_calculator);
-        final Button btn_blk = (Button)findViewById(R.id.btn_blank);
-        final Button btn_cont = (Button)findViewById(R.id.btn_contacts);
+        final Button btn_cal = (Button)findViewById(R.id.btn_get_calculator);
+        final Button btn_blk = (Button)findViewById(R.id.btn_get_blank);
+        final Button btn_cont = (Button)findViewById(R.id.btn_get_contacts);
 
+        //Calculator Button Navigation Function
         btn_cal.setOnClickListener(
             new View.OnClickListener() {
                 @Override
@@ -33,6 +34,8 @@ public class MainActivity extends AppCompatActivity {
                 }
            }
         );
+
+        //Blank Button Navigation Function
         btn_blk.setOnClickListener(
             new View.OnClickListener() {
                 @Override
@@ -42,6 +45,8 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         );
+
+        //Contacts Button Navigation Function
         btn_cont.setOnClickListener(
             new View.OnClickListener() {
                 @Override

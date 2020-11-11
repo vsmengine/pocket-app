@@ -18,48 +18,42 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
             <Button
-                android:id="@+id/btn_calculator"
-                android:layout_height="wrap_content"
                 android:layout_width="match_parent"
-                android:text="@string/btn_calculator_name"
-                android:background="@color/colorPrimary"
+                android:layout_height="wrap_content"
+                android:id="@+id/btn_get_blank"
+                android:text="@string/btn_get_blank"
                 android:textColor="#fff"
+                android:background="@color/colorPrimary"
                 android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"/>
+                android:layout_marginBottom="10dp"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
             <Button
-                android:id="@+id/btn_blank"
-                android:layout_height="wrap_content"
                 android:layout_width="match_parent"
-                android:text="@string/btn_blank_name"
-                android:background="@color/colorPrimary"
+                android:layout_height="wrap_content"
+                android:id="@+id/btn_get_calculator"
+                android:text="@string/btn_get_calculator"
                 android:textColor="#fff"
+                android:background="@color/colorPrimary"
                 android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                app:layout_constraintTop_toBottomOf="@id/btn_calculator"
-                app:layout_constraintLeft_toLeftOf="parent"/>
+                android:layout_marginBottom="10dp"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
             <Button
-                android:id="@+id/btn_contacts"
-                android:layout_height="wrap_content"
                 android:layout_width="match_parent"
-                android:text="@string/btn_contacts_name"
-                android:background="@color/colorPrimary"
+                android:layout_height="wrap_content"
+                android:id="@+id/btn_get_contacts"
+                android:text="@string/btn_get_contacts"
                 android:textColor="#fff"
+                android:background="@color/colorPrimary"
                 android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                app:layout_constraintTop_toBottomOf="@id/btn_blank"
-                app:layout_constraintLeft_toLeftOf="parent"/>
+                android:layout_marginBottom="10dp"/>
         </LinearLayout>
     </LinearLayout>
 

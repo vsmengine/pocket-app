@@ -18,12 +18,17 @@ import java.util.HashMap;
 public class GetContactDetail extends AppCompatActivity {
   String name, email, gender, address, mobile, home, office;
   TextView lblName, lblEmail, lblGender, lblAddress, lblMobile, lblHome, lblOffice;
-  Button showBtn;
+  Button toggleNameBtn;
+  Boolean isNameHide;
 
   @Override
   protected void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_cont_detail);
+
+    isNameHide = true;
+    Intent in = getIntent();
+    HashMap<String, String> hashMapObject = (HashMap<String, String>) in.getSerializableExtra("contactHashMap");
 
     lblName = (TextView)findViewById(R.id.cont_detail_name);
     lblEmail = (TextView)findViewById(R.id.cont_detail_email);
@@ -32,10 +37,7 @@ public class GetContactDetail extends AppCompatActivity {
     lblMobile = (TextView)findViewById(R.id.cont_detail_mobile);
     lblHome = (TextView)findViewById(R.id.cont_detail_home);
     lblOffice = (TextView)findViewById(R.id.cont_detail_office);
-    showBtn = (Button)findViewById(R.id.show_cont_detail_name);
-
-    Intent in = getIntent();
-    HashMap<String, String> hashMapObject = (HashMap<String, String>) in.getSerializableExtra("contactHashMap");
+    toggleNameBtn = (Button)findViewById(R.id.show_cont_detail_name);
 
     name = hashMapObject.get(Tags.TAG_NAME);
     email = hashMapObject.get(Tags.TAG_EMAIL);
@@ -45,7 +47,7 @@ public class GetContactDetail extends AppCompatActivity {
     home = hashMapObject.get(Tags.TAG_HOME);
     office = hashMapObject.get(Tags.TAG_OFFICE);
 
-    String starName = translateName(name);
+    final String starName = translateName(name);
     lblName.setText(starName);
     lblEmail.setText(email);
     lblGender.setText(gender);
@@ -53,15 +55,24 @@ public class GetContactDetail extends AppCompatActivity {
     lblMobile.setText(mobile);
     lblHome.setText(home);
     lblOffice.setText(office);
+    toggleNameBtn.setText("Show Name");
 
-    showBtn.setOnClickListener(new View.OnClickListener() {
+    toggleNameBtn.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        lblName.setText(name);
+        if(isNameHide) {
+          lblName.setText(name);
+          toggleNameBtn.setText("Hide Name");
+        } else {
+          lblName.setText(starName);
+          toggleNameBtn.setText("Show Name");
+        }
+        isNameHide = !isNameHide;
       }
     });
   }
 
+  //Star Translate Function
   public String translateName(String name) {
     String actualName = name;
     String starName = actualName.replaceAll("[A-Za-z0-9]", "*");

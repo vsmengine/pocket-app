@@ -48,19 +48,17 @@ public class GetContacts extends ListActivity {
       @Override
       public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
         Intent in = new Intent(getApplicationContext(), GetContactDetail.class);
-//        HashMap<String, String> qaz = contactsList.get(i);
         in.putExtra("contactHashMap", contactsList.get(i));
-//        Log.d("wsx", "*************" + in.getSerializableExtra("contactHashMap"));
         startActivity(in);
       }
     });
-
     DownloadContacts downloadContacts = new DownloadContacts();
     downloadContacts.execute();
   };
 
   public class DownloadContacts extends AsyncTask<Void, Void, Void> {
 
+    //Pre Download Execution Function
     @Override
     protected void onPreExecute() {
       super.onPreExecute();
@@ -72,6 +70,7 @@ public class GetContacts extends ListActivity {
       dialog.show();
     }
 
+    //Post Download Execution Function
     @Override
     protected void onPostExecute(Void aVoid) {
       super.onPostExecute(aVoid);
@@ -88,6 +87,7 @@ public class GetContacts extends ListActivity {
       }
     }
 
+    //Background Execution Function
     @Override
     protected Void doInBackground(Void... voids) {
       DownloadService service = new DownloadService();
@@ -121,16 +121,10 @@ public class GetContacts extends ListActivity {
             contSingle.put(Tags.TAG_OFFICE, newOffice);
 
             contactsList.add(contSingle);
-
-            Log.d("Response","**************" + contact);
           }
-
-//        Log.d("Response",">" + jsonContacts);
         } catch (JSONException e) {
           e.printStackTrace();
         }
-      } else {
-
       }
       return null;
     }
